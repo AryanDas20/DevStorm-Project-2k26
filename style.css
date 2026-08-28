@@ -1,0 +1,451 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Trebuchet MS;
+  background-color: #222121 ;
+  
+}
+#h11{
+    color:rgba(212, 168, 67);
+}
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+background: linear-gradient(135deg, #434343 0%, #1c1c1c 100%);
+  padding: 0 30px;
+  height: 60px;
+  
+}
+@keyframes mymove {
+  0% {   }
+  90% {                background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 50%, #FF9800 100%);}
+}
+.logo {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.navbar a {
+  display: block;
+  color: #ddd;
+  text-align: center;
+  padding: 20px 15px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  
+}
+
+.navbar a:hover {
+    color:#444;
+                   background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 50%, #FF9800 100%);
+         animation: mymove 3s infinite;
+       
+    
+}
+
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: calc(60vh - 0px); 
+  padding: 40px;
+   vertical-align: text-bottom;
+    background-image: url("large.jpg");
+background-repeat: no-repeat;
+background-attachment: fixed; 
+background-size: 100% 100%;
+opacity: 0.9;
+position: relative; /* Ensure children are positioned relative to this section */
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #e7e3eb;
+  max-width: 600px;
+}
+.search-container {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.3);
+  justify-content: center;
+  overflow: hidden; /* Ensures child elements follow the border-radius */
+  position: absolute;
+top: 60%;
+left: 50%;
+transform: translate(-50%, -50%);
+transition: max-width 1s;
+
+}
+
+ .search-container:hover{
+    max-width: 700px;
+ }
+
+.search-input {
+  flex: 1;
+  padding: 15px 25px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.search-button {
+  padding: 15px 30px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #434343 0%, #1c1c1c 100%);
+  color: rgb(255, 247, 2);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.search-button:hover {
+  background-color: #7d00b3;
+}
+
+/* Footer Styling */
+.bottom-text {
+  text-align: center;
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #3d3d3d;
+  color: #aaa;
+}
+#about11{
+     background: linear-gradient(30deg, #434343 0%, #1c1c1c 100%);
+     color: #e7e3eb;
+    justify-content:flex-start;
+    margin: 50px;
+    padding:30px;
+    transition: margin 1s;
+      transition: margin 1s;
+}
+#about11:hover{
+      background: linear-gradient(170deg, #434343 0%, #1c1c1c 100%);
+     color: #e7e3eb;
+    justify-content:flex-start;
+    margin: 0;
+    transition: margin 1s;
+      transition: margin 1s;
+    padding:60px;
+}
+#about11{
+    
+    justify-content:flex-start;
+    margin: 50px;
+    
+}
+#about12 {
+    padding:20px;
+     color: #e7e3eb;
+      background-color: #222121 ;
+ 
+}
+:root {
+            /* Greyish & Cool Blue Palette */
+            --bg-page: #1c1c1c; /* Dark background */
+            --bg-card: #2a2a2a; /* Slightly lighter card background */
+            --text-main: #f0f0f0;
+            --text-muted: #b5c114;
+            --accent-blue: #efb300; /* Cool blue accent */
+            --border-color: #444;
+            --accentt-blue: #f6ff00;
+            
+
+        }
+.team-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+            gap: 30px; /* Space between cards */
+            justify-content: center;
+            padding:40px;
+            width: 100%;
+        }
+
+        /* --- CARD STYLES --- */
+        .member-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 300px; /* Fixed width for standard view */
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Cool Hover Effect: Border and Shadow */
+        .member-card:hover {
+            transform: translateY(-50px);
+            box-shadow: 20px 20px 20px rgba(0,0,0,0.5);
+            border-color: var(--accent-blue);
+        }
+
+        /* Optional: Top Accent Line on Hover */
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* --- CARD CONTENT --- */
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #595858; /* Placeholder color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            border: 3px solid #1c1c1c; /* Contrast border */
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-high-contrast);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .member-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Pushes button to the bottom if bios have different lengths */
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 4s ease, color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 50%, #FF9800 100%);
+            color: white;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .team-container {
+                gap: 20px;
+            }
+            .member-card {
+                width: 100%; /* Full width on mobile */
+                max-width: 350px;
+            }
+        }
+        html {
+  scroll-behavior: smooth;
+}
+
+/* ========================================================= */
+/* --- NEW PASSWORD CHECKER OUTPUT STYLES --- */
+/* ========================================================= */
+
+.checker-output {
+  position: absolute;
+  top: calc(60% + 50px); /* Position below search bar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: max-width 1s; /* Match hover animation of search container */
+  box-shadow: 20px 20px 20px rgba(0,0,0,0.3); /* Similar shadow to card hover */
+  color: var(--text-main);
+  z-index: 10;
+}
+
+.checker-output.expanded {
+  max-width: 700px;
+}
+
+/* Accent top border, just like member cards */
+.checker-output::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-blue);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+/* Trigger expand when hovering over the search bar or output box */
+.search-container:hover + .checker-output::before,
+.checker-output:hover::before {
+    transform: scaleX(1);
+}
+
+.search-container:hover + .checker-output,
+.checker-output:hover {
+  max-width: 700px;
+  border-color: var(--accent-blue); /* Similar to card hover */
+}
+
+/* Header style within output */
+.output-title {
+  color: var(--text-main);
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--accent-blue);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Summary text style */
+.output-summary {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+/* Individual check styles */
+.checks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1rem;
+  color: #e7e3eb;
+}
+
+.status-icon {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.status-valid {
+  color: #4CAF50; /* Green for pass */
+}
+
+.status-invalid {
+  color: #f44336; /* Red for fail */
+}
+
+.valid-icon::before {
+  content: "✔";
+}
+
+.invalid-icon::before {
+  content: "✖";
+}
+
+/* Breach output style */
+.breach-alert {
+  background-color: rgba(244, 67, 54, 0.2);
+  border: 1px solid #f44336;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  color: #f44336;
+}
+
+.strength-display {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.strength-bar-container {
+  width: 100%;
+  max-width: 400px;
+  height: 10px;
+  background-color: rgba(67, 67, 67, 0.6);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.strength-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+}

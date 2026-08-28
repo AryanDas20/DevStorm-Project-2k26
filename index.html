@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWordX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">PassWordX</div>
+    <ul>
+        
+      <li><a href="#home"><span>Home</span></a></li>
+      <li><a href="#about12"><span>Desc</span></a></li>
+      <li><a href="#about11"><span>About Us</span></a></li>
+    
+    </ul>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="hero">
+    <h1 id="h11">Welcome to PassWordX</h1>
+    <p>Secure, fast, and reliable password management for your digital life. Navigate using the menu above to learn more.</p>
+     <div class="search-container">
+      <input type="text" class="search-input" placeholder="Search for passwords, vaults, or tools...">
+      <button class="search-button">Search</button>
+    </div>
+    
+    <!-- New Password Checker Output Container -->
+    <div id="password-checker-results" class="checker-output" style="display: none;">
+      <!-- Content will be dynamically inserted here by JavaScript -->
+    </div>
+    
+  </main>
+  
+  <section id="about11">
+    <h1 id="h11">Password Strength checker</h1>
+    <p>LPassword Strength & Breach Checker," is a cybersecurity utility that evaluates the security of user credentials through a combination of local complexity analysis and privacy-preserving breach detection. To fulfill the strict requirement of never exposing the raw password over the network, the tool processes the password's strength score entirely on the client side by analyzing factors like length, character variety, and entropy. For the breach verification component, the application must cryptographically hash the password locally and employ a k-Anonymity model—sending only a short prefix of the hash to a public breach API. The API then returns a list of compromised hash suffixes matching that prefix, allowing the local client to securely cross-reference the remainder of the hash to determine if the credential has been exposed in known data leaks without ever transmitting the actual password.</p>
+          
+  </section>
+  <section id="about12">
+    <h1 id="h11">About Us</h1>
+  <div class="team-container">
+
+        <!-- MEMBER CARD 1 -->
+        <div class="member-card">
+            <!-- Default User Icon Placeholder -->
+            <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
+            <h3 class="member-name">Aryan Das</h3>
+            <p class="member-role">Lead Developer</p>
+            <p class="member-bio">Expert in backend security systems and cryptographic implementation. Focused on password analysis algorithms.</p>
+            <a href="#" class="contact-btn">View Profile</a>
+        </div>
+
+        <!-- MEMBER CARD 2 -->
+        <div class="member-card">
+            <!-- Default User Icon Placeholder -->
+          <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
+            <h3 class="member-name">Om Prabhat Singh</h3>
+            <p class="member-role">UI/UX Designer</p>
+            <p class="member-bio">Specializes in creating intuitive security interfaces that simplify complex data for everyday users.</p>
+            <a href="#" class="contact-btn">View Profile</a>
+        </div>
+
+        <!-- MEMBER CARD 3 -->
+        <div class="member-card">
+            <!-- Default User Icon Placeholder -->
+         <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
+            <h3 class="member-name">Nishan</h3>
+            <p class="member-role">Security Analyst</p>
+            <p class="member-bio">Conducts breach data research and manages API integrations for real-time leaked credential checks.</p>
+            <a href="#" class="contact-btn">View Profile</a>
+        </div>
+         <div class="member-card">
+            <!-- Default User Icon Placeholder -->
+         <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
+            <h3 class="member-name">Anshuman basu</h3>
+            <p class="member-role">Security Analyst</p>
+            <p class="member-bio">Conducts breach data research and manages API integrations for real-time leaked credential checks.</p>
+            <a href="#" class="contact-btn">View Profile</a>
+        </div>
+
+    </div>
+  </section>
+
+  <!-- Bottom Footer -->
+  <footer class="bottom-text">
+    <p>&copy; 2026 PassWordX. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
