@@ -1,100 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const inputField = document.querySelector('.search-input');
-    const searchContainer = document.querySelector('.search-container');
-    const outputContainer = document.getElementById('password-checker-results');
+    const pwInput = document.getElementById('pw-input');
+    const outputContainer = document.getElementById('password-output');
+    const statusIcon = document.getElementById('status-icon');
+    const statusText = document.getElementById('status-text');
+    const strengthBar = document.getElementById('strength-bar');
+    const strengthDesc = document.getElementById('strength-desc');
+    const breachStatus = document.getElementById('breach-status');
 
-    // Simple password strength check criteria
-    const criteria = {
-        length: { text: "At least 8 characters", valid: (pw) => pw.length >= 8 },
-        uppercase: { text: "Contains at least one uppercase letter", valid: (pw) => /[A-Z]/.test(pw) },
-        lowercase: { text: "Contains at least one lowercase letter", valid: (pw) => /[a-z]/.test(pw) },
-        number: { text: "Contains at least one number", valid: (pw) => /\d/.test(pw) },
-        specialChar: { text: "Contains at least one special character", valid: (pw) => /[^A-Za-z0-9]/.test(pw) }
-    };
-
-    inputField.addEventListener('input', () => {
-        const password = inputField.value;
+    pwInput.addEventListener('input', async () => {
+        const password = pwInput.value;
 
         if (password.length > 0) {
             outputContainer.style.display = 'block';
-            checkPasswordStrength(password);
+            await checkPassword(password);
         } else {
             outputContainer.style.display = 'none';
         }
     });
 
-    // Mirror hover expansion effect to keep sync
-    searchContainer.addEventListener('mouseover', () => {
-        outputContainer.classList.add('expanded');
-    });
+    async function checkPassword(password) {
+        // 1. Local Strength Check
+        const strengthScore = calculateLocalStrength(password);
+        updateLocalStrengthDisplay(strengthScore);
 
-    searchContainer.addEventListener('mouseout', () => {
-        outputContainer.classList.remove('expanded');
-    });
+        // 2. Breach Check (k-Anonymity)
+        const sha1 = await sha1Hash(password);
+        const prefix = sha1.slice(0, 5);
+        const suffix = sha1.slice(5).toUpperCase();
+        
+        try {
+            const apiResponse = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+            if (!apiResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const hashes = await apiResponse.text();
+            const count = checkSuffix(hashes, suffix);
+            
+            updateBreachDisplay(count);
+            updateOverallDisplay(strengthScore, count);
+        } catch (error) {
+            console.error('API Error:', error);
+            breachStatus.innerHTML = '<span class="breach-alert">Error checking for breaches. API may be offline.</span>';
+        }
+    }
 
-    function checkPasswordStrength(password) {
-        let passedChecks = 0;
-        let checksHtml = '';
-        let strength = 0;
+    function calculateLocalStrength(password) {
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+        return score;
+    }
 
-        for (const key in criteria) {
-            const check = criteria[key];
-            if (check.valid(password)) {
-                passedChecks++;
-                strength++;
-                checksHtml += `<div class="check-item"><span class="status-icon status-valid valid-icon"></span><span class="check-text">${check.text}</span></div>`;
-            } else {
-                checksHtml += `<div class="check-item"><span class="status-icon status-invalid invalid-icon"></span><span class="check-text">${check.text}</span></div>`;
+    function updateLocalStrengthDisplay(score) {
+        const percentage = (score / 5) * 100;
+        strengthBar.style.width = `${percentage}%`;
+        
+        let desc = '';
+        let color = '';
+        switch(score) {
+            case 0:
+            case 1: desc = 'Weak'; color = '#ff4d4d'; break;
+            case 2: desc = 'Fair'; color = '#FF9800'; break;
+            case 3: desc = 'Good'; color = '#FFEB3B'; break;
+            case 4: desc = 'Strong'; color = 'rgba(212, 168, 67, 1)'; break;
+            case 5: desc = 'Excellent!'; color = '#4caf50'; break;
+        }
+        strengthBar.style.backgroundColor = color;
+        strengthDesc.textContent = desc;
+        strengthDesc.style.color = color;
+    }
+
+    async function sha1Hash(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+
+    function checkSuffix(hashes, suffix) {
+        const lines = hashes.split('\n');
+        for (let line of lines) {
+            const [hashSuffix, count] = line.trim().split(':');
+            if (hashSuffix === suffix) {
+                return parseInt(count);
             }
         }
+        return 0;
+    }
 
-        // --- Strength Score and Bar ---
-        const maxScore = Object.keys(criteria).length;
-        const scorePercentage = (strength / maxScore) * 100;
-        let strengthText = "";
-        let barColor = "";
-
-        if (scorePercentage < 40) {
-            strengthText = "Weak (Too easily guessed)";
-            barColor = "#f44336"; // Red
-        } else if (scorePercentage < 60) {
-            strengthText = "Moderate (Requires caution)";
-            barColor = "#FF9800"; // Orange
-        } else if (scorePercentage < 80) {
-            strengthText = "Strong (Good password)";
-            barColor = "var(--accent-blue)"; // Gold/Accent from your theme
+    function updateBreachDisplay(count) {
+        if (count > 0) {
+            breachStatus.innerHTML = `<span class="breach-alert">WARNING: This password was found ${count.toLocaleString()} times in known breaches. DO NOT USE.</span>`;
         } else {
-            strengthText = "Very Strong (Excellent!)";
-            barColor = "#4CAF50"; // Green
+            breachStatus.innerHTML = '<span class="no-breach">This password has not been found in known leaks (according to k-Anonymity check).</span>';
         }
+    }
 
-        // --- Breach Checker (Simulated for this tool) ---
-        let breachHtml = '';
-        // Predefined list of leaked prefixes for simulation (last digits are hashed)
-        const commonLeakedPrefixes = ['password', '123456', 'admin', 'qwerty'];
-        const pwPrefix = password.slice(0, password.length - 2).toLowerCase();
-
-        if (commonLeakedPrefixes.includes(pwPrefix) && password.length > 5) {
-            breachHtml = `<div class="breach-alert"><span class="output-summary status-invalid invalid-icon"></span> WARNING: This password has been found in known data leaks. DO NOT USE.</div>`;
+    function updateOverallDisplay(strengthScore, count) {
+        if (count > 0) {
+            statusIcon.style.backgroundColor = '#ff4d4d';
+            statusText.textContent = 'PWNED: This password is compromised.';
+            statusText.style.color = '#ff4d4d';
+        } else {
+            if (strengthScore >= 4) {
+                statusIcon.style.backgroundColor = '#4caf50';
+                statusText.textContent = 'SECURE: Local strong, no breaches found.';
+                statusText.style.color = '#4caf50';
+            } else if (strengthScore >= 2) {
+                statusIcon.style.backgroundColor = '#FFEB3B';
+                statusText.textContent = 'FAIR: Locally fair, no breaches found.';
+                statusText.style.color = '#FFEB3B';
+            } else {
+                statusIcon.style.backgroundColor = '#FF9800';
+                statusText.textContent = 'WEAK: Locally weak, but no breaches found.';
+                statusText.style.color = '#FF9800';
+            }
         }
-
-        // Create the full output HTML structure
-        outputContainer.innerHTML = `
-            <h2 class="output-title">Password Strength Summary</h2>
-            <p class="output-summary">Evaluating: <span style="font-family: monospace; border-bottom: 1px dashed white; display: inline-block; padding-bottom: 2px;">${password}</span></p>
-            
-            <div class="checks-container">
-                ${checksHtml}
-            </div>
-
-            ${breachHtml}
-
-            <div class="strength-display">
-                <span class="strength-text" style="color: ${barColor};">${strengthText}</span>
-                <div class="strength-bar-container">
-                    <div class="strength-bar" style="width: ${scorePercentage}%; background-color: ${barColor};"></div>
-                </div>
-            </div>
-        `;
     }
 });
