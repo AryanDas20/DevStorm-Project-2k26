@@ -1,22 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. DOM Element Selections
     const pwInput = document.getElementById('pw-input');
     const outputContainer = document.getElementById('password-output');
+    // Important: Select the "Check" button to add a click trigger
+    const searchButton = document.querySelector('.search-button');
+
     const statusIcon = document.getElementById('status-icon');
     const statusText = document.getElementById('status-text');
     const strengthBar = document.getElementById('strength-bar');
     const strengthDesc = document.getElementById('strength-desc');
     const breachStatus = document.getElementById('breach-status');
 
-    pwInput.addEventListener('input', async () => {
+    // State variable to keep track of checker output visibility
+    let isOutputVisible = false;
+
+    // ========================================================
+    // --- Button Click Listener (TOGGLE FUNCTIONALITY) ---
+    // Only running the check when this button is clicked and the output is hidden.
+    // If the output is visible, clicking the button hides it.
+    // ========================================================
+    searchButton.addEventListener('click', async () => {
         const password = pwInput.value;
 
-        if (password.length > 0) {
-            outputContainer.style.display = 'block';
-            await checkPassword(password);
+        if (!isOutputVisible) {
+            // State: Hidden -> Check and Show
+            // Only proceed if there's a password typed
+            if (password.length > 0) {
+                // Clear the input and all current output text to "reset"
+                pwInput.value = '';
+                clearOutputs();
+
+                // Run the whole complex check process
+                await checkPassword(password);
+
+                // Show the output and update state
+                outputContainer.style.display = 'block';
+                isOutputVisible = true;
+                
+                // Add a hover-effect class for extra visual indication of active state
+                outputContainer.classList.add('visible');
+            } else {
+                // Input is empty, do nothing
+                outputContainer.style.display = 'none';
+            }
         } else {
+            // State: Visible -> Hide (the whole password checker will go)
             outputContainer.style.display = 'none';
+            isOutputVisible = false;
+            outputContainer.classList.remove('visible');
         }
     });
+
+    // --- Helper function to clear previous outputs ---
+    function clearOutputs() {
+        statusText.textContent = '';
+        strengthDesc.textContent = '';
+        breachStatus.innerHTML = '';
+        strengthBar.style.width = '0%';
+        statusIcon.style.backgroundColor = 'transparent';
+    }
+
+    // ========================================================
+    // --- Complex Logic & Display Functions (Same as Before) ---
+    // ========================================================
 
     async function checkPassword(password) {
         // 1. Local Strength Check
