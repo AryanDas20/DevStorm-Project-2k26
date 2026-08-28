@@ -14,9 +14,9 @@
     <ul>
         
       <li><a href="#home"><span>Home</span></a></li>
-      <li><a href="#about12"><span>Desc</span></a></li>
-      <li><a href="#about11"><span>About Us</span></a></li>
-    
+      <li><a href="#about11"><span>Desc..</span></a></li>
+      <li><a href="#about12"><span>About Us</span></a></li>
+      
     </ul>
   </nav>
 
@@ -25,20 +25,36 @@
     <h1 id="h11">Welcome to PassWordX</h1>
     <p>Secure, fast, and reliable password management for your digital life. Navigate using the menu above to learn more.</p>
      <div class="search-container">
-      <input type="text" class="search-input" placeholder="Search for passwords, vaults, or tools...">
-      <button class="search-button">Search</button>
+      <input type="text" id="pw-input" class="search-input" placeholder="Enter password to check...">
+      <button class="search-button">Check</button>
     </div>
     
-    <!-- New Password Checker Output Container -->
-    <div id="password-checker-results" class="checker-output" style="display: none;">
-      <!-- Content will be dynamically inserted here by JavaScript -->
+    <!-- Password Checker Output -->
+    <div id="password-output" class="checker-output" style="display: none;">
+      <div class="strength-summary">
+        <h3>PASSWORD STATUS</h3>
+        <div class="status-indicator">
+          <div id="status-icon" class="status-icon"></div>
+          <p id="status-text"></p>
+        </div>
+      </div>
+      <div class="strength-meter">
+        <h4>Local Strength</h4>
+        <div class="meter-container">
+          <div id="strength-bar" class="strength-bar"></div>
+        </div>
+        <p id="strength-desc"></p>
+      </div>
+      <div class="breach-check">
+        <h4>Breach Check.</h4>
+        <p id="breach-status"></p>
+      </div>
     </div>
     
   </main>
-  
   <section id="about11">
-    <h1 id="h11">Password Strength checker</h1>
-    <p>LPassword Strength & Breach Checker," is a cybersecurity utility that evaluates the security of user credentials through a combination of local complexity analysis and privacy-preserving breach detection. To fulfill the strict requirement of never exposing the raw password over the network, the tool processes the password's strength score entirely on the client side by analyzing factors like length, character variety, and entropy. For the breach verification component, the application must cryptographically hash the password locally and employ a k-Anonymity model—sending only a short prefix of the hash to a public breach API. The API then returns a list of compromised hash suffixes matching that prefix, allowing the local client to securely cross-reference the remainder of the hash to determine if the credential has been exposed in known data leaks without ever transmitting the actual password.</p>
+    <h1 id="h11">Descriptions</h1>
+    <p>Password Strength & Breach Checker," is a cybersecurity utility that evaluates the security of user credentials through a combination of local complexity analysis and privacy-preserving breach detection. To fulfill the strict requirement of never exposing the raw password over the network, the tool processes the password's strength score entirely on the client side by analyzing factors like length, character variety, and entropy. For the breach verification component, the application must cryptographically hash the password locally and employ a k-Anonymity model—sending only a short prefix of the hash to a public breach API. The API then returns a list of compromised hash suffixes matching that prefix, allowing the local client to securely cross-reference the remainder of the hash to determine if the credential has been exposed in known data leaks without ever transmitting the actual password.</p>
           
   </section>
   <section id="about12">
@@ -51,8 +67,8 @@
             <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
             <h3 class="member-name">Aryan Das</h3>
             <p class="member-role">Lead Developer</p>
-            <p class="member-bio">Expert in backend security systems and cryptographic implementation. Focused on password analysis algorithms.</p>
-            <a href="#" class="contact-btn">View Profile</a>
+            <p class="member-bio">I am currently pursuing my first year btech cse course and learning some new skills</p>
+            <a href="https://www.linkedin.com/in/aryandas-iit/" class="contact-btn">View Profile</a>
         </div>
 
         <!-- MEMBER CARD 2 -->
@@ -69,22 +85,28 @@
         <div class="member-card">
             <!-- Default User Icon Placeholder -->
          <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
-            <h3 class="member-name">Nishan</h3>
+            <h3 class="member-name">Jaan Nisar Shaikh</h3>
             <p class="member-role">Security Analyst</p>
             <p class="member-bio">Conducts breach data research and manages API integrations for real-time leaked credential checks.</p>
-            <a href="#" class="contact-btn">View Profile</a>
+            <a href="https://www.linkedin.com/in/jaan-nisar-shaikh-350807431/" class="contact-btn">View Profile</a>
         </div>
          <div class="member-card">
             <!-- Default User Icon Placeholder -->
          <div class="member-photo"><img src="Lovely_Professional_University_logo.png" height="60px" width="60px"></div> 
-            <h3 class="member-name">Anshuman basu</h3>
+            <h3 class="member-name">Anshuman Basu</h3>
             <p class="member-role">Security Analyst</p>
             <p class="member-bio">Conducts breach data research and manages API integrations for real-time leaked credential checks.</p>
-            <a href="#" class="contact-btn">View Profile</a>
+            <a href="https://www.linkedin.com/in/anshuman-basu-5ba05a3a8/" class="contact-btn">View Profile</a>
         </div>
 
     </div>
+
+</body>
+</html>
+          
   </section>
+  
+
 
   <!-- Bottom Footer -->
   <footer class="bottom-text">
@@ -92,6 +114,5 @@
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
