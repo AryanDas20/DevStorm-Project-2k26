@@ -8,6 +8,8 @@
 ## 📖 Overview
 
 This project is a secure tool that scores a password's strength locally and checks whether it has appeared in known data leaks via a public breach API. **The primary architectural requirement is strict data privacy:** the application must perform the breach verification without ever sending the raw password over the network.
+Sample
+<img width="2938" height="1522" alt="image" src="https://github.com/user-attachments/assets/5bb8832a-58d5-4e18-aa16-309b6f43d04a" />
 
 ---
 
