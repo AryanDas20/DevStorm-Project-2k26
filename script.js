@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Add a hover-effect class for extra visual indication of active state
                 outputContainer.classList.add('visible');
+
+                // --- NEW CODE HERE ---
+                // Change button text to "Clear" when results are shown
+                searchButton.textContent = 'Clear';
+                // ---------------------
             } else {
                 // Input is empty, do nothing
                 outputContainer.style.display = 'none';
@@ -48,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
             outputContainer.style.display = 'none';
             isOutputVisible = false;
             outputContainer.classList.remove('visible');
+
+            // --- NEW CODE HERE ---
+            // Change button text back to original "Check" when results are hidden
+            searchButton.textContent = 'Check';
+            // ---------------------
         }
     });
 
