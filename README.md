@@ -1,6 +1,7 @@
 # 🔒 Password Strength & Breach Checker
 ![Uploading image.png…]()
 
+
 > A cybersecurity utility designed to evaluate the robustness of user passwords while verifying their compromise status, all without exposing sensitive data.
 
 ## 📖 Overview
